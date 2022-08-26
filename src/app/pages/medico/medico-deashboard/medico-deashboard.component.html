@@ -1,0 +1,572 @@
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin/deashboard">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">Tus citas</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+       
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            opciones
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="medico/perfil" data-toggle="collapse" data-target="#collapseTwo"
+                aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>mi perfil</span>
+            </a>
+         
+        </li>
+
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="medico/cita" data-toggle="collapse" data-target="#collapseUtilities"
+                aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>mis Solicitudes</span>
+            </a>
+           
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+      
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="" (click)="cerrarsesion()" data-toggle="collapse" data-target="#collapseUtilities"
+              aria-expanded="true" aria-controls="collapseUtilities">
+              <i class="fas fa-fw fa-wrench"></i>
+              <span>cerrar sesion</span>
+          </a>
+         
+      </li>
+        <!-- Nav Item - Tables -->
+      
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+     
+
+        <!-- Sidebar Message -->
+     
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- Topbar Search -->
+                <form
+                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                            aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+
+                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                    <li class="nav-item dropdown no-arrow d-sm-none">
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <!-- Dropdown - Messages -->
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                            aria-labelledby="searchDropdown">
+                            <form class="form-inline mr-auto w-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control bg-light border-0 small"
+                                        placeholder="Search for..." aria-label="Search"
+                                        aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <div class="topbar-divider d-none d-sm-block"></div>
+
+                   
+
+                </ul>
+
+            </nav>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid"  >
+                 
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <button type="button" class="btn btn-primary" (click)="nuevaCita(newcitatemplate)">agregar cita</button>
+             
+                    <button   class="btn btn-primary" (click)="openPdf(abrirpdf)" >exportar a pdf</button>
+
+                  <select type="button" class="btn btn-primary" [(ngModel)]="filtro" (change)="onChange($event)">
+                  <option  [value]="'todos'"  selected>todos</option>
+                  <option [value]= "'en espera'">en espera</option>
+                  <option [value]="'completado'"> completado</option>
+                  </select>
+              </div> 
+                           
+
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>titulo</th>
+                                <th>descripcion</th>
+                                <th>paciente</th>
+                                <th>fecha</th>
+                                <th>hora de la cita</th>
+                                <th>editar</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>titulo</th>
+                                <th>descripcion</th>
+                                <th>paciente</th>
+                                <th>fecha</th>
+                                <th>hora de la cita</th>
+                                <th>editar</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                           
+                            <tr *ngFor="let cita3 of citas;let i=index">
+                                <td>{{cita3.titulo}} </td>
+                                <td>{{cita3.descripcion}}</td>
+                                <td>{{cita3.name}} {{cita3.lastname}}</td>
+                                
+                                <td>{{cita3.fecha}}</td>
+                                <td> {{cita3.hora_inicio}}</td>
+                                <td><button  class="btn-warning" (click)="editar(cita3,actualizar,i)">editar</button></td>
+                            </tr>
+                         
+                            
+                        </tbody>
+                    </table>
+                </div>
+             
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2021</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+
+
+
+<ng-template  #actualizar let-pdf>
+  
+    <div class="modal-header">
+        <h1 class="modal-title">Actualizar Cita</h1>
+        </div>
+        <div class="modal-body">
+      <div *ngIf="!cancel"> 
+        
+     <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Titulo</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="cita.titulo"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">descripcion </span>
+        </div>
+        <textarea type="text" class="form-control" [(ngModel)]="cita.descripcion"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1"></textarea>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Fecha de la cita</span>
+        </div>
+        <input type="date" class="form-control" [(ngModel)]="cita.fecha"    placeholder="name" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+       
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">hora de la cita</span>
+        </div>
+        <input type="time" class="form-control" [(ngModel)]="cita.hora_inicio"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">hora de llegada del paciente</span>
+        </div>
+        <input type="time" class="form-control" [(ngModel)]="cita.hora_llegada"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">hora que se retiro el paciente</span>
+        </div>
+        <input type="time" class="form-control" [(ngModel)]="cita.hora_salida"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <div class="input-group mb-3" *ngIf="cita.estado_cita !='cancelada'">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">estado de la cita</span>
+        </div>
+        <select type="button"  [(ngModel)]="cita.estado_cita" aria-label="Username" class="form-control"  aria-describedby="basic-addon1">
+         
+          <option value="en espera">en espera</option>
+          <option value="completado"> completado</option>
+          </select> 
+      </div>
+      <div *ngIf="cita.estado_cita=='cancelada'">
+        <b>Estado de la cita:</b><p>CANCELADA</p>
+      </div>
+      <div class="card mb-4">
+        <div class="card-header">
+          
+      <h4> datos del paciente</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item"><b>Nombre completo:</b> {{cita.name}} {{cita.lastname}}</li>
+            <li class="list-group-item"><b>fecha de nacimiento</b> {{cita.fecha_nac}}</li>
+            <li class="list-group-item"><b>correo electronico:</b> {{cita.email}}</li>
+            <li class="list-group-item"><b>numero de telefono:</b> {{cita.telefono}}</li>
+            <li class="list-group-item"><b>Nacionalidad:</b> {{cita.nacionalidad}}</li>
+          </ul>
+        </div>
+      </div>
+        
+      <div class="card mb-4">
+        <div class="card-header">
+          
+          <h4>Citas anteriores</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-group" *ngFor="let cita4 of citas1">
+            <li class="list-group-item"><b>Nombre completo:</b> {{cita4.name}} {{cita4.lastname}}</li>
+            <li class="list-group-item"><b>fecha:</b> {{cita4.fecha}}</li>
+            <li class="list-group-item"><b>hora:</b> {{cita4.hora_inicio}}</li>
+            <li class="list-group-item"><b>descripcion:</b> {{cita4.descripcion}}</li>
+              <br>
+          </ul>
+        
+        </div>
+            
+    </div>
+<button class="btn-primary" printSectionId="actualizar"  [useExistingCss]="true" ngxPrint >exportar a pdf</button>
+    <button class="btn-primary" (click)="update()" >guardar</button>
+    <button  class="btn-primary"   (click)="cancelar()" *ngIf="cita.estado_cita !='cancelada'">Cancelar cita</button>
+    <button class="btn-primary" *ngIf="cita.estado_cita!='cancelada'" (click)="delete()">Eliminar</button>  
+   
+  </div>
+  <div *ngIf="cancel">
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">motivo de cancelacion</span>
+      </div>
+      <textarea type="time" class="form-control" [(ngModel)]="cita.motivo_anulacion"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1"></textarea>
+    </div>
+     <button class="btn btn-primary"  (click)="cancelarCita()">cancelar cita</button>
+     <button class="btn-primary"  (click)="cancelar()">atras</button>
+
+  </div>
+  <button class="btn-danger" (click)="close()">cerrar</button>
+  </div>
+</ng-template>
+
+<ng-template  #newcitatemplate>
+    <div class="modal-header">
+        <h1 class="modal-title">Agendar Cita</h1>
+        </div>
+        <div class="modal-body">
+          
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Titulo</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="cita.titulo"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">descripcion </span>
+        </div>
+        <textarea type="text" class="form-control" [(ngModel)]="cita.descripcion"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1"></textarea>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Fecha de la cita</span>
+        </div>
+        <input type="date" class="form-control" [(ngModel)]="cita.fecha"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+       
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">hora de la cita</span>
+        </div>
+        <input type="time" class="form-control" [(ngModel)]="cita.hora_inicio"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      
+
+      <h4> datos del paciente</h4>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Name</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="cita.name"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">lastname</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="cita.lastname"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">email</span>
+        </div>
+        <input type="email" class="form-control" [(ngModel)]="cita.email"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">telefono</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="cita.telefono"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">cedula</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="cita.cedula"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">fecha de nacimiento</span>
+        </div>
+        <input type="date" class="form-control" [(ngModel)]="cita.fecha_nac"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Nacionalidad</span>
+        </div>
+        <input type="text" class="form-control" [(ngModel)]="cita.nacionalidad"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+</div>
+  <button class="btn-primary"  (click)="agregarCita()">crear</button>
+     
+    <button class="btn-danger" (click)="close()">cerrar</button>
+</ng-template>
+
+
+<ng-container  [ngTemplateOutlet]="pdf"> 
+  <div  id="actualizar" >
+    <div class="modal-header">
+        <h1 class="modal-title"> Cita {{cita.name}}  {{cita.lastname}}</h1>
+        </div>
+        <div class="modal-body">
+          <div class="card mb-4" *ngIf="false" >
+            <div class="card-header">
+              
+          <h4> Datos de la cita</h4>
+            </div>
+            <div class="card-body">
+              <ul class="list-group">
+                <li class="list-group-item"><b>Titulo:</b> {{cita.titulo}}</li>
+                <li class="list-group-item"><b>descripcion:</b> {{cita.descripcion}}</li>
+                <li class="list-group-item"><b>paciente:</b> {{cita.name}}{{cita.lastname}}</li>
+                <li class="list-group-item"><b>fecha de la cita(yyy-mm-dd):</b> {{cita.fecha}}</li>
+                <li class="list-group-item"><b>Hora de la cita:</b> {{cita.hora_inicio}}</li>
+              </ul>
+            </div>
+          </div>
+  
+      <div class="card mb-4">
+        <div class="card-header">
+          
+      <h4> datos del paciente</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item"><b>Nombre completo:</b> {{cita.name}} {{cita.lastname}}</li>
+            <li class="list-group-item"><b>fecha de nacimiento</b> {{cita.fecha_nac}}</li>
+            <li class="list-group-item"><b>correo electronico:</b> {{cita.email}}</li>
+            <li class="list-group-item"><b>numero de telefono:</b> {{cita.telefono}}</li>
+            <li class="list-group-item"><b>Nacionalidad:</b> {{cita.nacionalidad}}</li>
+          </ul>
+        </div>
+      </div>
+        
+      <div class="card mb-4">
+        <div class="card-header">
+          
+          <h4>Citas anteriores</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-group" *ngFor="let cita4 of citas1">
+            <li class="list-group-item"><b>Nombre completo:</b> {{cita4.name}} {{cita4.lastname}}</li>
+            <li class="list-group-item"><b>fecha:</b> {{cita4.fecha}}</li>
+            <li class="list-group-item"><b>hora:</b> {{cita4.hora_inicio}}</li>
+            <li class="list-group-item"><b>descripcion:</b> {{cita4.descripcion}}</li>
+              <br>
+          </ul>
+        
+        </div>
+            
+    </div>
+     
+</div>
+</div>
+
+</ng-container>
+
+<ng-container  [ngTemplateOutlet]="pdf">
+<div id="resumido">
+
+<div class="card mb-4" >
+  <div class="card-header">
+    
+    <h4>Citas </h4>
+  </div>
+  <div class="card-body">
+    <ul class="list-group" *ngFor="let resumido of citas">
+      <li class="list-group-item"><b>Nombre completo:</b> {{resumido.name}} {{resumido.lastname}}</li>
+      <li class="list-group-item"><b>fecha:</b> {{resumido.fecha}}</li>
+      <li class="list-group-item"><b>hora:</b> {{resumido.hora_inicio}}</li>
+      <li class="list-group-item"><b>descripcion:</b> {{resumido.descripcion}}</li>
+      
+      <li class="list-group-item"><b>estado actual:</b> {{resumido.estado_cita}}  </li>
+      
+      <li class="list-group-item" *ngIf="resumido.estado_cita=='cancelada'"><b>motivo_anulacion:</b> {{resumido.motivo_anulacion}}  </li>
+      <br>
+    </ul>
+  
+  </div>
+      
+</div>
+</div>
+</ng-container>
+<ng-template   #abrirpdf let-pdf>
+  <div class="modal-header">
+    <h1 class="modal-title"> mi modal</h1>
+    </div>
+    <div class="modal-body">
+ <button class="btn btn-primary"printSectionId="resumido"  [useExistingCss]="true" ngxPrint  > exportar (Resumido)</button>
+<button class="btn btn-primary"  printSectionId="detallado"  [useExistingCss]="true" ngxPrint >exportar (Detallado)</button>
+<button class="btn-danger"   (click)="close()" >close</button>
+</div>
+</ng-template>
+<ng-container  [ngTemplateOutlet]="pdf">
+
+  <div id="detallado">
+
+    <div class="card mb-4" >
+      <div class="card-header">
+        
+        <h4>Citas </h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-group" *ngFor="let resumido of citas">
+          <li class="list-group-item"><b>Nombre completo:</b> {{resumido.name}} {{resumido.lastname}}</li>
+          <li class="list-group-item"><b>fecha:</b> {{resumido.fecha}}</li>
+          <li class="list-group-item"><b>hora:</b> {{resumido.hora_inicio}}</li>
+          <li class="list-group-item"><b>descripcion:</b> {{resumido.descripcion}}</li>
+           
+          <li class="list-group-item"><b>Hora en la que llego el paciente al consultorio:</b> {{resumido.hora_llegada}}  </li>
+         
+          <li class="list-group-item"><b>Hora que termino la cita:</b> {{resumido.hora_fin}}  </li>
+         
+          <li class="list-group-item"><b>hora que se fue el paciente del consultorio:</b> {{resumido.hora_salida}}  </li>
+         
+          <li class="list-group-item"><b>estado actual:</b> {{resumido.estado_cita}}  </li>
+          <li class="list-group-item" *ngIf="resumido.estado_cita == 'cancelada'"><b>Porque se cancelo la cita:</b> {{resumido.motivo_anulacion}}  </li>
+          
+          <br>
+        </ul>
+      
+      </div>
+          
+    </div>
+    </div>
+</ng-container>
+
+<ng-template #cancelarcita>
+
+
+  
+
+    <div class="card mb-4" >
+      <div class="modal-header">
+        <h1 class="modal-title"> Cancelar Cita</h1>
+        </div>
+        <div class="modal-body">
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">motivo de cancelacion</span>
+            </div>
+            <textarea type="time" class="form-control" [(ngModel)]="cita.motivo_anulacion"   placeholder="name" aria-label="Username" aria-describedby="basic-addon1"></textarea>
+          </div>
+           <button class="btn btn-primary">cancelar</button>
+           <button close()>close</button>
+          </div>
+          </div>
+</ng-template>
